@@ -1,4 +1,3 @@
-#!/usr/bin/php
 <?php
 	/**
 	 * This file is part of brawler
@@ -25,6 +24,26 @@
 	 * @license		GNU Lesser General Public License 
 	 * 				http://www.gnu.org/licenses/lgpl.html
 	 */
-	 
-	include 'src/brawler.php';
+
+	/**
+	 * Autoloader
+	 * 
+	 * @package		Brawler
+	 * @author 		Cem Derin
+	 * @copyright	2009 Cem Derin, <actioncem@gmail.com>
+	 */
+	class Brawler_Loader {
+		/**
+		 * Tries to load a class by name
+		 * 
+		 * @param String $classname
+		 * @return Boolean
+		 */
+		public static function load($classname) {
+			$filename = str_replace('_', DIRECTORY_SEPARATOR, $classname). '.php';
+			return require_once $filename;
+		}
+	}
+
+	
 ?>
