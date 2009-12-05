@@ -1,4 +1,3 @@
-#!/usr/bin/php
 <?php
 	/**
 	 * This file is part of brawler
@@ -17,14 +16,31 @@
 	 * along with this library; if not, write to the Free Software Foundation, 
 	 * Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 	 * 
-	 * Copyright (c) 2009 Cem Derin, <actioncem@gmail.com>
+	 * Copyright (c) 2009 Cem Derin <actioncem@gmail.com>
 	 * 
 	 * @author		Cem Derin, <actioncem@gmail.com>
 	 * @package		Brawler
-	 * @copyright	2009 Cem Derin, <actioncem@gmail.com>
+	 * @copyright	2009 Cem Derin <actioncem@gmail.com>
 	 * @license		GNU Lesser General Public License 
 	 * 				http://www.gnu.org/licenses/lgpl.html
 	 */
-	 
-	include 'src/brawler.php';
+
+	/**
+	 * Provides a central point of starting the application
+	 * 
+	 * @package		Brawler
+	 * @author 		Cem Derin
+	 * @copyright	2009 Cem Derin, <actioncem@gmail.com>
+	 */
+	class Brawler_Application {
+		/**
+		 * Starts the application
+		 * 
+		 * @return int
+		 */
+		public static function run() {
+			echo 'works'. PHP_EOL;
+			return 0;
+		}
+	}
 ?>
