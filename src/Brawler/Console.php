@@ -33,10 +33,91 @@
 	 * @copyright	2009 Cem Derin, <actioncem@gmail.com>
 	 */
 	class Brawler_Console {
+		/**
+		 * Holds the parsed arguments
+		 * 
+		 * @var Brawler_Console_Argument_List
+		 */
 		protected static $_arguments = null;
 		
-		public static function getArgument() {}
+		/**
+		 * Returns a single argument
+		 * 
+		 * @param String $argument
+		 * @return Brawler_Console_Argument
+		 */
+		public static function getArgument($argument) {
+			if(!self::$_arguments) {
+				self::_parseArguments();
+			}
+			
+			$i = self::$_arguments->getIterator();
+			while($i->valid()) {
+				if($i->current()->getName() == $argument) {
+					return $i->current();
+				}
+				$i->next();
+			}
+			
+			return null;
+		}
+		
+		/**
+		 * Returns all arguments
+		 * 
+		 * @return Brawler_Console_Argument_List
+		 */
 		public static function getArguments() {}
-		public static function _parseArguments() {}
+		
+		/**
+		 * Parses the given arguments
+		 * 
+		 * @return void
+		 */
+		public static function _parseArguments() {
+			self::$_arguments = new Brawler_Console_Argument_List();
+			
+			$args = new ArrayObject($_SERVER['argv']);
+			$args->offsetUnset(0);
+			$i = $args->getIterator();
+			while($i->valid()) {
+				if(substr($i->current(), 0, 1) == '-') {
+					// parse argument
+					self::_parseArgument($i->current());
+				} else {
+					// invalid call
+					throw new Exception('Invalid call');
+				}
+				
+				$i->next();
+			}
+		}
+		
+		/**
+		 * Parses a single argument
+		 * 
+		 * @param $argument
+		 * @return unknown_type
+		 */
+		protected static function _parseArgument($argument) {
+			if(strstr($argument, '=')) {
+				// definition
+				$name = substr($argument, 1, 1);
+				
+				$parts = split('=', $argument);
+				if(substr($parts[1], 0, 1) == '"') {
+					$value = substr($parts[1], 1, strlen($parts[1] - 2));
+				} else {
+					$value = $parts[1];
+				}
+				
+				self::$_arguments->append(new Brawler_Console_Argument($name, $value));
+			} else {
+				// option or optiongroup
+				for($i = 1; $i < strlen($argument); $i++) {
+					self::$_arguments->append(new Brawler_Console_Argument(substr($argument, $i, 1)));
+				}
+			}
+		}
 	}
 ?>

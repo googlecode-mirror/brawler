@@ -26,22 +26,57 @@
 	 */
 
 	/**
-	 * Provides a central point of starting the application
+	 * MVC View class
 	 * 
 	 * @package		Brawler
 	 * @author 		Cem Derin
 	 * @copyright	2009 Cem Derin, <actioncem@gmail.com>
 	 */
-	class Brawler_Application {
+	class Brawler_View {
 		/**
-		 * Starts the application
+		 * Assignes values
 		 * 
-		 * @return int
+		 * @var Array
 		 */
-		public static function run() {
-			$front = new Brawler_Controller_Front();
-			$front->dispatch();
-			return 0;
+		protected $_values = array();
+		
+		/**
+		 * Magic setter
+		 * 
+		 * @param String $name
+		 * @param Mixed $value
+		 * @return void
+		 */
+		public function __set($name, $value) {
+			$this->_values[$name] = $value;
+		}
+		
+		/**
+		 * Magic getter
+		 * 
+		 * @param String $name
+		 * @return Mixed
+		 */
+		public function __get($name) {
+			if(isset($this->_values[$name])) {
+				return $this->_values[$name];
+			} else {
+				return null;
+			}
+		}
+		
+		/**
+		 * Renders the view
+		 * 
+		 * @return void
+		 */
+		public function render() {
+			ob_start();
+			$this->view();
+			$output = ob_get_contents();
+			ob_end_clean();
+			
+			Brawler_Console_Output::output($output);
 		}
 	}
 ?>
