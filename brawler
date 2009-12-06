@@ -19,11 +19,11 @@
 	 * 
 	 * Copyright (c) 2009 Cem Derin, <actioncem@gmail.com>
 	 * 
-	 * @author		Cem Derin, <actioncem@gmail.com>
-	 * @package		Brawler
-	 * @copyright	2009 Cem Derin, <actioncem@gmail.com>
-	 * @license		GNU Lesser General Public License 
-	 * 				http://www.gnu.org/licenses/lgpl.html
+	 * @author      Cem Derin, <actioncem@gmail.com>
+	 * @package     Brawler
+	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
+	 * @license     GNU Lesser General Public License 
+	 *              http://www.gnu.org/licenses/lgpl.html
 	 */
 	 
 	include 'src/brawler.php';

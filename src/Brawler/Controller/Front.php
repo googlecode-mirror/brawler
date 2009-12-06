@@ -16,22 +16,22 @@
 	 * along with this library; if not, write to the Free Software Foundation, 
 	 * Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 	 * 
-	 * Copyright (c) 2009 Cem Derin <actioncem@gmail.com>
+	 * Copyright (c) 2009 Cem Derin, <actioncem@gmail.com>
 	 * 
-	 * @author		Cem Derin, <actioncem@gmail.com>
-	 * @package		Brawler
-	 * @copyright	2009 Cem Derin <actioncem@gmail.com>
-	 * @license		GNU Lesser General Public License 
-	 * 				http://www.gnu.org/licenses/lgpl.html
+	 * @author      Cem Derin, <actioncem@gmail.com>
+	 * @package     Brawler
+	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
+	 * @license     GNU Lesser General Public License 
+	 *              http://www.gnu.org/licenses/lgpl.html
 	 */
 
 	/**
-	 * MVC Front Controller
+	 * Front controller
 	 * 
-	 * @package		Brawler
-	 * @subpackage	Controller
-	 * @author 		Cem Derin
-	 * @copyright	2009 Cem Derin, <actioncem@gmail.com>
+	 * @package     Brawler
+	 * @subpackage  Controller
+	 * @author      Cem Derin, <actioncem@gmail.com>
+	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 */
 	class Brawler_Controller_Front extends Brawler_Controller {
 		/**
@@ -39,8 +39,7 @@
 		 * @see trunk/src/Brawler/Brawler_Controller#dispatch()
 		 */
 		public function dispatch($action = 'index') {
-			$instance = new Brawler_Controller();
-			$instance->forward('help');
+			$this->forward('help');
 		}
 	}
 ?>

@@ -18,14 +18,14 @@
 	 * 
 	 * Copyright (c) 2009 Cem Derin, <actioncem@gmail.com>
 	 * 
-	 * @author		Cem Derin, <actioncem@gmail.com>
-	 * @package		Brawler
-	 * @copyright	2009 Cem Derin, <actioncem@gmail.com>
-	 * @license		GNU Lesser General Public License 
-	 * 				http://www.gnu.org/licenses/lgpl.html
+	 * @author      Cem Derin, <actioncem@gmail.com>
+	 * @package     Brawler
+	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
+	 * @license     GNU Lesser General Public License 
+	 *              http://www.gnu.org/licenses/lgpl.html
 	 */
 
-	// turn in error messages
+	// turn on error messages
 	error_reporting(E_ALL ^ E_STRICT);
 	ini_set('display_errors', 1);	
 
