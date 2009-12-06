@@ -26,22 +26,56 @@
 	 */
 
 	/**
-	 * Provides a central point of starting the application
+	 * Represents a single console argument
 	 * 
 	 * @package		Brawler
+	 * @subpackage	Console
 	 * @author 		Cem Derin
 	 * @copyright	2009 Cem Derin, <actioncem@gmail.com>
 	 */
-	class Brawler_Application {
+	class Brawler_Console_Argument {
 		/**
-		 * Starts the application
+		 * Name of this argument
 		 * 
-		 * @return int
+		 * @var String
 		 */
-		public static function run() {
-			$front = new Brawler_Controller_Front();
-			$front->dispatch();
-			return 0;
+		protected $_name;
+		
+		/**
+		 * Value of this argument
+		 * 
+		 * @var String
+		 */
+		protected $_value;
+		
+		/**
+		 * Ctor
+		 * 
+		 * @param String $name
+		 * @param String $value
+		 * @return void
+		 */
+		public function __construct($name, $value = null) {
+			$this->_name = $name;
+			$this->_value = $value;
+		}
+		
+		/**
+		 * Returns the name of the argument
+		 * 
+		 * @return String
+		 */
+		public function getName() {
+			return $this->_name;
+		}
+		
+		/**
+		 * Returns the value of this argument
+		 * 
+		 * @return String
+		 */
+		public function getValue() {
+			return $this->_value;
 		}
 	}
 ?>

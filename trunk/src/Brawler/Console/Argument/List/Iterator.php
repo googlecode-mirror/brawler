@@ -16,29 +16,31 @@
 	 * along with this library; if not, write to the Free Software Foundation, 
 	 * Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 	 * 
-	 * Copyright (c) 2009 Cem Derin, <actioncem@gmail.com>
+	 * Copyright (c) 2009 Cem Derin <actioncem@gmail.com>
 	 * 
 	 * @author		Cem Derin, <actioncem@gmail.com>
 	 * @package		Brawler
-	 * @copyright	2009 Cem Derin, <actioncem@gmail.com>
+	 * @copyright	2009 Cem Derin <actioncem@gmail.com>
 	 * @license		GNU Lesser General Public License 
 	 * 				http://www.gnu.org/licenses/lgpl.html
 	 */
 
-	// turn in error messages
-	error_reporting(E_ALL ^ E_STRICT);
-	ini_set('display_errors', 1);	
-
-	// set include path
-	set_include_path(get_include_path(). PATH_SEPARATOR. dirname(__FILE__));
-	
-	// require autoloader
-	require_once 'Brawler/Loader.php';
-	
-	// register autoloader
-	spl_autoload_register(array('Brawler_Loader', 'load'));
-	
-	// kick application
-	return Brawler_Application::run();
-	
+	/**
+	 * Autoloader
+	 * 
+	 * @package		Brawler
+	 * @subpackage	Console
+	 * @author 		Cem Derin
+	 * @copyright	2009 Cem Derin, <actioncem@gmail.com>
+	 */
+	class Brawler_Console_Argument_List_Iterator extends ArrayIterator {
+		/**
+		 * Returns the current element
+		 * 
+		 * @return Brawler_Console_Argument
+		 */
+		public function current() {
+			return;
+		}
+	}
 ?>
