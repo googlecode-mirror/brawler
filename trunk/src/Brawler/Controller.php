@@ -16,21 +16,21 @@
 	 * along with this library; if not, write to the Free Software Foundation, 
 	 * Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 	 * 
-	 * Copyright (c) 2009 Cem Derin <actioncem@gmail.com>
+	 * Copyright (c) 2009 Cem Derin, <actioncem@gmail.com>
 	 * 
-	 * @author		Cem Derin, <actioncem@gmail.com>
-	 * @package		Brawler
-	 * @copyright	2009 Cem Derin <actioncem@gmail.com>
-	 * @license		GNU Lesser General Public License 
-	 * 				http://www.gnu.org/licenses/lgpl.html
+	 * @author      Cem Derin, <actioncem@gmail.com>
+	 * @package     Brawler
+	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
+	 * @license     GNU Lesser General Public License 
+	 *              http://www.gnu.org/licenses/lgpl.html
 	 */
 
 	/**
-	 * MVC controller class
+	 * Controller base class
 	 * 
-	 * @package		Brawler
-	 * @author 		Cem Derin
-	 * @copyright	2009 Cem Derin, <actioncem@gmail.com>
+	 * @package     Brawler
+	 * @author      Cem Derin, <actioncem@gmail.com>
+	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 */
 	class Brawler_Controller {
 		/**
@@ -57,7 +57,7 @@
 			if(method_exists($this, $action.'Action')) {
 				call_user_func(array($this, $action.'Action'));
 			} else {
-				throw new Exception('Could not fond action '. $action);
+				throw new Exception('Could not find action '. $action);
 			}
 			
 			if($this->_render && $this->_view) {

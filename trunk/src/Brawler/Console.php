@@ -16,21 +16,22 @@
 	 * along with this library; if not, write to the Free Software Foundation, 
 	 * Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 	 * 
-	 * Copyright (c) 2009 Cem Derin <actioncem@gmail.com>
+	 * Copyright (c) 2009 Cem Derin, <actioncem@gmail.com>
 	 * 
-	 * @author		Cem Derin, <actioncem@gmail.com>
-	 * @package		Brawler
-	 * @copyright	2009 Cem Derin <actioncem@gmail.com>
-	 * @license		GNU Lesser General Public License 
-	 * 				http://www.gnu.org/licenses/lgpl.html
+	 * @author      Cem Derin, <actioncem@gmail.com>
+	 * @package     Brawler
+	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
+	 * @license     GNU Lesser General Public License 
+	 *              http://www.gnu.org/licenses/lgpl.html
 	 */
 
 	/**
-	 * Provides basic cli application features
+	 * Provides basic cli features
 	 * 
-	 * @package		Brawler
-	 * @author 		Cem Derin
-	 * @copyright	2009 Cem Derin, <actioncem@gmail.com>
+	 * @package     Brawler
+	 * @subpackage  Console
+	 * @author      Cem Derin, <actioncem@gmail.com>
+	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 */
 	class Brawler_Console {
 		/**
@@ -67,7 +68,13 @@
 		 * 
 		 * @return Brawler_Console_Argument_List
 		 */
-		public static function getArguments() {}
+		public static function getArguments() {
+			if(!self::$_arguments) {
+				self::_parseArguments();
+			}
+			
+			return self::$_arguments;
+		}
 		
 		/**
 		 * Parses the given arguments
@@ -97,7 +104,7 @@
 		 * Parses a single argument
 		 * 
 		 * @param $argument
-		 * @return unknown_type
+		 * @return void
 		 */
 		protected static function _parseArgument($argument) {
 			if(strstr($argument, '=')) {

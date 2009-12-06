@@ -18,19 +18,19 @@
 	 * 
 	 * Copyright (c) 2009 Cem Derin, <actioncem@gmail.com>
 	 * 
-	 * @author		Cem Derin, <actioncem@gmail.com>
-	 * @package		Brawler
-	 * @copyright	2009 Cem Derin, <actioncem@gmail.com>
-	 * @license		GNU Lesser General Public License 
-	 * 				http://www.gnu.org/licenses/lgpl.html
+	 * @author      Cem Derin, <actioncem@gmail.com>
+	 * @package     Brawler
+	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
+	 * @license     GNU Lesser General Public License 
+	 *              http://www.gnu.org/licenses/lgpl.html
 	 */
 
 	/**
 	 * Autoloader
 	 * 
-	 * @package		Brawler
-	 * @author 		Cem Derin
-	 * @copyright	2009 Cem Derin, <actioncem@gmail.com>
+	 * @package     Brawler
+	 * @author      Cem Derin, <actioncem@gmail.com>
+	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 */
 	class Brawler_Loader {
 		/**
