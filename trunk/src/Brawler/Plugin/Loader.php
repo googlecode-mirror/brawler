@@ -92,7 +92,8 @@
 			$files = scandir($dir);
 			
 			foreach($files as $file) {
-				if($file != '.' AND $file != '..') {
+				// excludes .svn stuff as well ;)
+				if(substr($file, 0, 1) != '.') {
 					if(is_dir($dir. DIRECTORY_SEPARATOR. $file)) {
 						// determine classname
 						$parts = array(
