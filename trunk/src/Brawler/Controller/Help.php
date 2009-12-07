@@ -40,6 +40,38 @@
 		 */
 		public function indexAction() {
 			$this->setView(new Brawler_View_Help_Index());
+			$this->forward('help', 'showArguments');
+		}
+		
+		/**
+		 * Displays the argument list
+		 * 
+		 * @return void
+		 */
+		public function showArgumentsAction() {
+			$this->setView(new Brawler_View_Grid());
+			
+			// assemble rows
+			$rows = new ArrayObject();
+			$arguments = Brawler_Application::getArguments();
+			$i = $arguments->getIterator();
+			while($i->valid()) {
+				$put = array();
+				
+				if($i->current()->hasValue()) {
+					$put[] = '-'. $i->current()->getName().'=<value>';
+				} else {
+					$put[] = '-'. $i->current()->getName();
+				}
+				
+				$put[] = $i->current()->getDescription();
+				
+				$rows->append($put);
+				
+				$i->next();
+			}
+			
+			$this->getView()->setRows($rows);
 		}
 	}
 ?>

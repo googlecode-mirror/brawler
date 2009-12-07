@@ -26,63 +26,27 @@
 	 */
 
 	/**
-	 * Application class - entry point
+	 * Just a template plugin
 	 * 
 	 * @package     Brawler
+	 * @subpackage  Plugin_Template
 	 * @author      Cem Derin, <actioncem@gmail.com>
 	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 */
-	class Brawler_Application {
+	class Brawler_Plugin_Template_Template extends Brawler_Plugin {
 		/**
-		 * Starts the application
-		 * 
-		 * @return int
+		 * (non-PHPdoc)
+		 * @see trunk/src/Brawler/Brawler_Plugin#getArguments()
 		 */
-		public static function run() {
-			$front = new Brawler_Controller_Front();
-			$front->dispatch();
-			return 0;
-		}
-		
-		/**
-		 * Returns an argument list
-		 * 
-		 * @return Brawler_Plugin_Argument_List
-		 */
-		public static function getArguments() {
-			// Application arguments
-			// Argument List
+		public function getArguments() {
 			$list = new Brawler_Plugin_Argument_List();
 			
-			// define plugin directory
 			$list->append(new Brawler_Plugin_Argument(
-				'p', 
-				'Defines a plugin directory (default ./Plugins)', 
-				true
+				't',
+				'Template argument. not really usable',
+				false
 			));
 			
-			// append plugin directory
-			$list->append(new Brawler_Plugin_Argument(
-				'P',
-				'Appends a plugin directory',
-				true
-			));
-			
-			// Plugin arguments
-			// @TODO find a better way to merge ArrayObjects
-			$plugins = Brawler_Plugin_Loader::getPlugins();
-			$i = $plugins->getIterator();
-			while($i->valid()) {
-				$pluginArguments = $i->current()->getArguments();
-				$k = $pluginArguments->getIterator();
-				while($k->valid()) {
-					$list->append($k->current());					
-					$k->next();
-				}
-				$i->next();
-			}
-			
-			// Return list
 			return $list;
 		}
 	}
