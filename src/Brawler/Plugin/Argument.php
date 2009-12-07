@@ -26,83 +26,78 @@
 	 */
 
 	/**
-	 * Controller base class
+	 * Represents a plugin argument
 	 * 
 	 * @package     Brawler
+	 * @subpackage  Plugin
 	 * @author      Cem Derin, <actioncem@gmail.com>
 	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 */
-	class Brawler_Controller {
+	class Brawler_Plugin_Argument {
 		/**
-		 * Attached view
+		 * Defines wether this is a key=value Argument
 		 * 
-		 * @var Brawler_View
+		 * @var Bool
 		 */
-		protected $_view = null;
+		protected $_hasValue = null;
 		
 		/**
-		 * Defines wether the controller should render the view
+		 * Holds a little description for the user
 		 * 
-		 * @var Boolean
+		 * @var String
 		 */
-		protected $_render = true;
+		protected $_description = null;
 		
 		/**
-		 * Dispatches a controller call
+		 * Defines the flagname
 		 * 
-		 * @param String $action
+		 * @var char
+		 */
+		protected $_name = null;
+		
+		/**
+		 * Ctor
+		 * 
+		 * @param String             $name
+		 * @param Short description  $description
+		 * @param Key-Value-Argument $hasValue
 		 * @return void
 		 */
-		public function dispatch($action = 'index') {
-			if(method_exists($this, $action.'Action')) {
-				call_user_func(array($this, $action.'Action'));
-			} else {
-				throw new Exception('Could not find action '. $action);
+		public function __construct($name, $description, $hasValue = false) {
+			if(strlen($name) > 1) {
+				throw new Brawler_Plugin_Argument_Exception('Argument name is to long. Max 1 char');
 			}
 			
-			if($this->_render && $this->_view) {
-				$this->_view->render();
-			}
+			$this->_hasValue = $hasValue;
+			$this->_description = $description;
+			$this->_name = $name;
 		}
 		
 		/**
-		 * Forwards to another controller and/or action
-		 * @param String $controller
-		 * @param String $action
-		 * @return void
-		 */
-		public function forward($controller, $action = 'index') {
-			if($this->_view AND $this->_render) {
-				$this->_view->render();
-				$this->_render = false;	
-			}
-			
-			$controllerClass = 
-				'Brawler_Controller_'.
-				ucfirst(strtolower($controller));
-				
-			$controller = new $controllerClass;
-				
-			call_user_func(array($controller, 'dispatch'), $action);
-		}
-		
-		/**
-		 * Sets the actial view
+		 * Returns the flags name
 		 * 
-		 * @param Brawler_View $view
-		 * @return void
+		 * @return String
 		 */
-		public function setView(Brawler_View $view) {
-			$this->_view = $view;
+		public function getName() {
+			return $this->_name;
 		}
 		
 		/**
-		 * Returns the current view
+		 * Returns the flags description
 		 * 
-		 * @return Brawler_View
+		 * @return String
 		 */
-		public function getView() {
-			return $this->_view;
+		public function getDescription() {
+			return $this->_description;
+		}
+		
+		/**
+		 * Returns wether the argument has a value
+		 * 
+		 * @return Bool
+		 */
+		public function hasValue() {
+			return $this->_hasValue;
 		}
 	}
 ?>
