@@ -39,7 +39,7 @@
 		 * @see trunk/src/Brawler/Brawler_Controller#dispatch()
 		 */
 		public function dispatch($action = 'index') {
-			$this->forward('help');
+			Brawler_Router::route();
 		}
 	}
 ?>

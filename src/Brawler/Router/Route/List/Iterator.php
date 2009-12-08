@@ -26,23 +26,15 @@
 	 */
 
 	/**
-	 * Index Help View
+	 * Iterator for Route Lists
 	 * 
 	 * @package     Brawler
-	 * @subpackage  Help
+	 * @subpackage  Router
 	 * @author      Cem Derin, <actioncem@gmail.com>
 	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 */
-	class Brawler_View_Help_Index extends Brawler_View {
-		/**
-		 * Raw output
-		 * 
-		 * @return String
-		 */
-		protected function view() {
-?>
-Usage: brawler [options]
-<?php 
+	class Brawler_Router_Route_List_Iterator extends ArrayIterator {
+		public function current() {
+			return parent::current();
 		}
 	}
-?>
