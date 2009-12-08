@@ -39,6 +39,8 @@
 		 * @return int
 		 */
 		public static function run() {
+			self::_registerDefaultRoutes();
+			
 			$front = new Brawler_Controller_Front();
 			$front->dispatch();
 			return 0;
@@ -68,6 +70,12 @@
 				true
 			));
 			
+			$list->append(new Brawler_Plugin_Argument(
+				'h',
+				'Prints command list',
+				false
+			));
+			
 			// Plugin arguments
 			// @TODO find a better way to merge ArrayObjects
 			$plugins = Brawler_Plugin_Loader::getPlugins();
@@ -84,6 +92,27 @@
 			
 			// Return list
 			return $list;
+		}
+		
+		/**
+		 * Registers the applications default routes
+		 * 
+		 * @return void
+		 */
+		protected static function _registerDefaultRoutes() {
+			$route = new Brawler_Router_Route(
+				'help',
+				new Brawler_Router_Argument_List(
+					array(
+						new Brawler_Router_Argument(
+							'h', false, false
+						)
+					)
+				),
+				new Brawler_Controller_Help()
+			);
+			
+			Brawler_Router::registerRoute($route);
 		}
 	}
 ?>

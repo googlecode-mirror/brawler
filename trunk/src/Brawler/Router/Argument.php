@@ -26,23 +26,65 @@
 	 */
 
 	/**
-	 * Index Help View
+	 * Represents an argument for routes
 	 * 
 	 * @package     Brawler
-	 * @subpackage  Help
+	 * @subpackage  Router
 	 * @author      Cem Derin, <actioncem@gmail.com>
 	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 */
-	class Brawler_View_Help_Index extends Brawler_View {
+	class Brawler_Router_Argument {
 		/**
-		 * Raw output
+		 * The flag this route is for
+		 * 
+		 * @var String
+		 */
+		protected $_flag = null;
+		
+		/**
+		 * Defines whether this route only is for vakued flags
+		 * 
+		 * @var Bool
+		 */
+		protected $_onValue = null;
+		
+		/**
+		 * Defines whether this route is only for a valued flag with a specific value
+		 * 
+		 * @var String
+		 */
+		protected $_specificValue = null;
+		
+		public function __construct($flag, $onValue = false, $specificValue = null) {
+			$this->_flag = $flag;
+			$this->_onValue = $onValue;
+			$this->_specificValue = $specificValue;
+		}
+		
+		/**
+		 * Returns the setted flag
 		 * 
 		 * @return String
 		 */
-		protected function view() {
-?>
-Usage: brawler [options]
-<?php 
+		public function getFlag() {
+			return $this->_flag;
+		}
+		
+		/**
+		 * Returns whether this argument needs a value
+		 * 
+		 * @return Boolean
+		 */
+		public function getOnValue() {
+			return $this->_onValue;
+		}
+		
+		/**
+		 * Returns whether a specific value is needed
+		 * 
+		 * @return String
+		 */
+		public function getSpecificValue() {
+			return $this->_specificValue;
 		}
 	}
-?>

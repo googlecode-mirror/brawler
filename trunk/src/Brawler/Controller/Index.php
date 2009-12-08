@@ -26,23 +26,14 @@
 	 */
 
 	/**
-	 * Index Help View
+	 * Index Controller
 	 * 
 	 * @package     Brawler
-	 * @subpackage  Help
 	 * @author      Cem Derin, <actioncem@gmail.com>
 	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 */
-	class Brawler_View_Help_Index extends Brawler_View {
-		/**
-		 * Raw output
-		 * 
-		 * @return String
-		 */
-		protected function view() {
-?>
-Usage: brawler [options]
-<?php 
+	class Brawler_Controller_Index extends Brawler_Controller {
+		public function indexAction() {
+			Brawler_Console_Output::output('Index');
 		}
 	}
-?>
