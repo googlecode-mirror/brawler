@@ -107,24 +107,51 @@
 		 * @return void
 		 */
 		protected static function _parseArgument($argument) {
-			if(strstr($argument, '=')) {
-				// definition
-				$name = substr($argument, 1, 1);
-				
-				$parts = split('=', $argument);
-				if(substr($parts[1], 0, 1) == '"') {
-					$value = substr($parts[1], 1, strlen($parts[1] - 2));
-				} else {
-					$value = $parts[1];
+			$return = self::_parseNonValuedArgument($argument);
+				if($return) return;
+			
+			$return = self::_parseValuedArgument($argument);
+				if($return) return;
+		}
+		
+		/**
+		 * Parses an non valued argument or an argument group
+		 * 
+		 * @param String $argument
+		 * @return Bool
+		 */
+		protected static function _parseNonValuedArgument($argument) {
+			if(preg_match('#-([a-zA-Z0-9]+)$#', $argument, $return)) {
+				for($i = 0; $i < strlen($return[1]); $i++) {
+					$newArgument = new Brawler_Console_Argument($return[1][$i]);
+					self::$_arguments->append($newArgument);
 				}
-				
-				self::$_arguments->append(new Brawler_Console_Argument($name, $value));
-			} else {
-				// option or optiongroup
-				for($i = 1; $i < strlen($argument); $i++) {
-					self::$_arguments->append(new Brawler_Console_Argument(substr($argument, $i, 1)));
-				}
+				return true;
 			}
+			return false;
+		}
+		
+		/**
+		 * Parses a valued argument
+		 * 
+		 * @param String $argument
+		 * @return Bool
+		 */
+		protected static function _parseValuedArgument($argument) {
+			if(preg_match('#-([a-zA-Z0-9]{1})=(.+)#', $argument, $return)) {
+				if(preg_match('#^"(.+)"$#', $return[2], $vReturn)) {
+					$value = $vReturn[1];
+				} else {
+					$value = $return[2];
+				}
+				
+				$newArgument = new Brawler_Console_Argument($return[1], $value);
+				self::$_arguments->append($newArgument);
+				
+				return true;
+			}
+			
+			return false;
 		}
 	}
 ?>

@@ -33,7 +33,7 @@
 	 * @author      Cem Derin, <actioncem@gmail.com>
 	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 */
-	class Brawler_Plugin_Argument_List extends ArrayObject {
+	class Brawler_Plugin_Argument_List extends Brawler_Array_Object {
 		/**
 		 * Returns the original Iterator
 		 * 

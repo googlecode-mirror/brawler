@@ -83,7 +83,7 @@
 				
 			$controller = new $controllerClass;
 				
-			call_user_func(array($controller, 'dispatch'), $action);
+			$controller->dispatch($action);
 		}
 		
 		/**

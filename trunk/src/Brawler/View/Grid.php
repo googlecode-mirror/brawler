@@ -114,7 +114,11 @@
 			$i = 0;
 			$print = '';
 			foreach($row as $value) {
-				$fillcount = $this->_columnwidth[$i] - strlen($value) + $this->_padding;
+				$fillcount = 
+							$this->_columnwidth[$i] - 
+							strlen($value) + 
+							$this->_padding;
+							
 				$print.= $value. str_repeat(' ', $fillcount);
 				$i++;
 			}
