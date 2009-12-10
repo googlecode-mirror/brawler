@@ -56,7 +56,9 @@
 			}
 			
 			if(Brawler_Console::getArgument('P')) {
-				$directory.= PATH_SEPARATOR. Brawler_Console::getArgument('P')->getValue();
+				$directory.= 
+					PATH_SEPARATOR. 
+					Brawler_Console::getArgument('P')->getValue();
 			}
 			
 			// Append Plugin Directorys to include Path

@@ -26,80 +26,26 @@
 	 */
 
 	/**
-	 * Represents a plugin argument
+	 * Array Object WITH merge method
 	 * 
 	 * @package     Brawler
-	 * @subpackage  Plugin
+	 * @subpackage  Array
 	 * @author      Cem Derin, <actioncem@gmail.com>
 	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 */
-	class Brawler_Plugin_Argument {
+	class Brawler_Array_Object extends ArrayObject {
 		/**
-		 * Defines wether this is a key=value Argument
+		 * Merges an Array Object in this one
 		 * 
-		 * @var Bool
-		 */
-		protected $_hasValue = null;
-		
-		/**
-		 * Holds a little description for the user
-		 * 
-		 * @var String
-		 */
-		protected $_description = null;
-		
-		/**
-		 * Defines the flagname
-		 * 
-		 * @var char
-		 */
-		protected $_name = null;
-		
-		/**
-		 * Ctor
-		 * 
-		 * @param String             $name
-		 * @param Short description  $description
-		 * @param Key-Value-Argument $hasValue
+		 * @param ArrayObject $array
 		 * @return void
 		 */
-		public function __construct($name, $description, $hasValue = false) {
-			if(strlen($name) > 1) {
-				throw new Brawler_Plugin_Argument_Exception(
-					'Argument name is to long. Max 1 char'
-				);
+		public function merge(ArrayObject $array) {
+			$i = $array->getIterator();
+			while($i->valid()) {
+				$this->append($i->current());
+				$i->next();
 			}
-			
-			$this->_hasValue = $hasValue;
-			$this->_description = $description;
-			$this->_name = $name;
-		}
-		
-		/**
-		 * Returns the flags name
-		 * 
-		 * @return String
-		 */
-		public function getName() {
-			return $this->_name;
-		}
-		
-		/**
-		 * Returns the flags description
-		 * 
-		 * @return String
-		 */
-		public function getDescription() {
-			return $this->_description;
-		}
-		
-		/**
-		 * Returns wether the argument has a value
-		 * 
-		 * @return Bool
-		 */
-		public function hasValue() {
-			return $this->_hasValue;
 		}
 	}
-?>
+	 

@@ -82,11 +82,7 @@
 			$i = $plugins->getIterator();
 			while($i->valid()) {
 				$pluginArguments = $i->current()->getArguments();
-				$k = $pluginArguments->getIterator();
-				while($k->valid()) {
-					$list->append($k->current());					
-					$k->next();
-				}
+				$list->merge($pluginArguments);
 				$i->next();
 			}
 			

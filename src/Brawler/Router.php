@@ -88,29 +88,17 @@
 			// check arguments
 			$argumentIterator = $route->getArguments()->getIterator();
 			$match = true;
+			
 			while($argumentIterator->valid()) {
-				if(!Brawler_Console::getArgument($argumentIterator->current()->getFlag())) {
-					// flag is missing break;
-					$match = false;
-					break;
-				}
-				
-				if($argumentIterator->current()->getOnValue()) {
-					if(!Brawler_Console::getArgument($argumentIterator->current()->getFlag())->getValue()) {
-						// value is missing, break
-						$match = false;
-						break;
-					}
+				$match = self::_checkFlag($argumentIterator->current());
+					if(!$match) break;
 					
-					if($argumentIterator->current()->getSpecificValue()) {
-						$specValue = $argumentIterator->current()->getSpecificValue();
-						if(Brawler_Console::getArgument($argumentIterator->current()->getFlag())->getValue() != $specValue) {
-							// value does not match, break
-							$match = false;
-							break;
-						}
-					}
-				}
+				$match = self::_checkValue($argumentIterator->current());
+					if(!$match) break;
+					
+				$match = self::_checkSpecificValue($argumentIterator->current());
+					if(!$match) break;
+				
 				$argumentIterator->next();
 			}
 			
@@ -123,5 +111,49 @@
 			
 			// check chain
 			return $route->getChain();
+		}
+		
+		/**
+		 * Checks whether a route argument is present in call request
+		 * 
+		 * @param Brawler_Router_Argument $routeArgument
+		 * @return Bool
+		 */
+		protected static function _checkFlag($routeArgument) {
+			return Brawler_Console::getArgument($routeArgument->getFlag());
+		}
+		
+		/**
+		 * Checks whether a route arguments value is present
+		 * 
+		 * @param Brawler_Router_Argument $routeArgument
+		 * @return Bool
+		 */
+		protected static function _checkValue($routeArgument) {
+			if($routeArgument->getOnValue()) {
+				$argument = Brawler_Console::getArgument($routeArgument->getFlag());
+				if(!$argument OR !$argument->getValue()) {
+					return false;
+				}
+			}
+			
+			return true;
+		}
+		
+		/**
+		 * Checks whether a route arguments vakue matches to the required
+		 * 
+		 * @param Brawler_Router_Argument $routeArgument
+		 * @return Bool
+		 */
+		protected static function _checkSpecificValue($routeArgument) {
+			if($routeArgument->getSpecificValue()) {
+				if(self::_checkValue($routeArgument)) {
+					$argument = Brawler_Console::getArgument($routeArgument->getFlag());
+					return ($argument->getValue() == $routeArgument->getSpecificValue());
+				}
+			}
+			
+			return true;
 		}
 	}
