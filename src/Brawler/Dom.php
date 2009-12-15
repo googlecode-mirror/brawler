@@ -23,35 +23,49 @@
 	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 * @license     GNU Lesser General Public License 
 	 *              http://www.gnu.org/licenses/lgpl.html
-	 */ 
+	 */
 
 	/**
-	 * Plugin Base class
+	 * DOM class for xhtml files
 	 * 
 	 * @package     Brawler
-	 * @subpackage  Plugin
 	 * @author      Cem Derin, <actioncem@gmail.com>
 	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 */
-	abstract class Brawler_Plugin {
+	class Brawler_Dom {
 		/**
-		 * Returns a List of arguments the plugin accept
+		 * DOMDocument
 		 * 
-		 * @return Brawler_Plugin_Argument_List
+		 * @var DOMDocument
 		 */
-		public function getArguments() {
-			return new Brawler_Plugin_Argument_List();
+		protected $_dom;
+		
+		/**
+		 * Holds the URL of this document
+		 * 
+		 * @var String
+		 */
+		protected $_currentURL;
+		
+		/**
+		 * Ctor
+		 * 
+		 * @param String $source
+		 * @return void
+		 */
+		public function __construct($source, $currentURL = null) {
+			$this->_dom = new DOMDocument();
+			$this->_currentURL = $currentURL;
+			
+			// unfortunately neccessary until a error handler is implemented
+			@$this->_dom->loadHTML($source);
 		}
 		
 		/**
-		 * Returns the plugins base name
-		 * 
-		 * @return String
+		 * Returns found URLs
+		 * @return DOMNodeList
 		 */
-		public function getBaseName() {
-			$return = split('_', get_class($this));
-			array_pop($return);
-			return implode('_', $return);
+		public function getUrls() {
+			return $this->_dom->getElementsByTagName('a');
 		}
 	}
-?>

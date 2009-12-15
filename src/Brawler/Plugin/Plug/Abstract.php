@@ -23,35 +23,26 @@
 	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 * @license     GNU Lesser General Public License 
 	 *              http://www.gnu.org/licenses/lgpl.html
-	 */ 
+	 */
 
 	/**
-	 * Plugin Base class
+	 * Abstract Plug class
 	 * 
 	 * @package     Brawler
 	 * @subpackage  Plugin
 	 * @author      Cem Derin, <actioncem@gmail.com>
 	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 */
-	abstract class Brawler_Plugin {
+	class Brawler_Plugin_Plug_Abstract {
 		/**
-		 * Returns a List of arguments the plugin accept
+		 * Reveives the notification
 		 * 
-		 * @return Brawler_Plugin_Argument_List
+		 * @param Brawler_Plugin_Notification $notification
+		 * @return Brawler_Plugin_Notification
 		 */
-		public function getArguments() {
-			return new Brawler_Plugin_Argument_List();
-		}
-		
-		/**
-		 * Returns the plugins base name
-		 * 
-		 * @return String
-		 */
-		public function getBaseName() {
-			$return = split('_', get_class($this));
-			array_pop($return);
-			return implode('_', $return);
+		public function notify(Brawler_Plugin_Notification $notification) {
+			if(method_exists($this, $notification->getMethod())) {
+				call_user_func(array($this, $notification->getMethod()), $notification);
+			}
 		}
 	}
-?>
