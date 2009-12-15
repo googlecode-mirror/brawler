@@ -23,35 +23,26 @@
 	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 * @license     GNU Lesser General Public License 
 	 *              http://www.gnu.org/licenses/lgpl.html
-	 */ 
+	 */
 
 	/**
-	 * Plugin Base class
+	 * Client plugin to make user agent settable
 	 * 
 	 * @package     Brawler
-	 * @subpackage  Plugin
+	 * @subpackage  Plugin_UserAgent
 	 * @author      Cem Derin, <actioncem@gmail.com>
 	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 */
-	abstract class Brawler_Plugin {
-		/**
-		 * Returns a List of arguments the plugin accept
-		 * 
-		 * @return Brawler_Plugin_Argument_List
-		 */
-		public function getArguments() {
-			return new Brawler_Plugin_Argument_List();
-		}
-		
-		/**
-		 * Returns the plugins base name
-		 * 
-		 * @return String
-		 */
-		public function getBaseName() {
-			$return = split('_', get_class($this));
-			array_pop($return);
-			return implode('_', $return);
+	class Brawler_Plugin_UserAgent_Client extends Brawler_Plugin_Plug_Abstract {
+		public function _initCurl($notification) {
+			if($notification instanceof Brawler_Plugin_Notification_Post) {
+				if(Brawler_Console::getArgument('a')->getValue()) {
+					curl_setopt(
+						$notification->getReturn(), 
+						CURLOPT_USERAGENT, 
+						Brawler_Console::getArgument('a')->getValue()
+					);
+				}
+			}
 		}
 	}
-?>

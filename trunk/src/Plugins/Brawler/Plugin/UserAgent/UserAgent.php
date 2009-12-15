@@ -23,35 +23,31 @@
 	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 * @license     GNU Lesser General Public License 
 	 *              http://www.gnu.org/licenses/lgpl.html
-	 */ 
+	 */
 
 	/**
-	 * Plugin Base class
+	 * Just a template plugin
 	 * 
 	 * @package     Brawler
-	 * @subpackage  Plugin
+	 * @subpackage  Plugin_UserAgent
 	 * @author      Cem Derin, <actioncem@gmail.com>
 	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 */
-	abstract class Brawler_Plugin {
+	class Brawler_Plugin_UserAgent_UserAgent extends Brawler_Plugin {
 		/**
-		 * Returns a List of arguments the plugin accept
-		 * 
-		 * @return Brawler_Plugin_Argument_List
+		 * (non-PHPdoc)
+		 * @see trunk/src/Brawler/Brawler_Plugin#getArguments()
 		 */
 		public function getArguments() {
-			return new Brawler_Plugin_Argument_List();
-		}
-		
-		/**
-		 * Returns the plugins base name
-		 * 
-		 * @return String
-		 */
-		public function getBaseName() {
-			$return = split('_', get_class($this));
-			array_pop($return);
-			return implode('_', $return);
+			$list = new Brawler_Plugin_Argument_List();
+			
+			$list->append(new Brawler_Plugin_Argument(
+				'a',
+				'Sets the submitted user agent',
+				true
+			));
+			
+			return $list;
 		}
 	}
 ?>

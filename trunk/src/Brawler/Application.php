@@ -76,6 +76,12 @@
 				false
 			));
 			
+			$list->append(new Brawler_Plugin_Argument(
+				'r',
+				'Resource URL to scan',
+				true
+			));
+			
 			// Plugin arguments
 			// @TODO find a better way to merge ArrayObjects
 			$plugins = Brawler_Plugin_Loader::getPlugins();
@@ -107,8 +113,30 @@
 				),
 				new Brawler_Controller_Help()
 			);
+			Brawler_Router::registerRoute($route);
+			
+			$route = new Brawler_Router_Route(
+				'scan',
+				new Brawler_Router_Argument_List(
+					array(
+						new Brawler_Router_Argument(
+							'r', true, false
+						)
+					)
+				),
+				new Brawler_Controller_Scan()
+			);
 			
 			Brawler_Router::registerRoute($route);
+		}
+		
+		/**
+		 * Returns the current version
+		 * 
+		 * @return String
+		 */
+		public static function getVersion() {
+			return '0.0.1';
 		}
 	}
 ?>

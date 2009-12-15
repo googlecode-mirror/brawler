@@ -23,35 +23,15 @@
 	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 * @license     GNU Lesser General Public License 
 	 *              http://www.gnu.org/licenses/lgpl.html
-	 */ 
+	 */
 
 	/**
-	 * Plugin Base class
+	 * General Brawler Exception
 	 * 
 	 * @package     Brawler
-	 * @subpackage  Plugin
 	 * @author      Cem Derin, <actioncem@gmail.com>
 	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 */
-	abstract class Brawler_Plugin {
-		/**
-		 * Returns a List of arguments the plugin accept
-		 * 
-		 * @return Brawler_Plugin_Argument_List
-		 */
-		public function getArguments() {
-			return new Brawler_Plugin_Argument_List();
-		}
+	class Brawler_Exception extends Exception {
 		
-		/**
-		 * Returns the plugins base name
-		 * 
-		 * @return String
-		 */
-		public function getBaseName() {
-			$return = split('_', get_class($this));
-			array_pop($return);
-			return implode('_', $return);
-		}
 	}
-?>

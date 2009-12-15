@@ -41,7 +41,32 @@
 		 */
 		public static function load($classname) {
 			$filename = str_replace('_', DIRECTORY_SEPARATOR, $classname). '.php';
-			return require_once $filename;
+			
+			if(self::checkForFile($filename)) {
+				return require_once $filename;
+			}
+			
+			return false;
+			
+		}
+		
+		/**
+		 * Searches for a canonical file in every include path
+		 * @param String $filename
+		 * @return Bool
+		 */
+		protected static function checkForFile($filename) {
+			$includes = split(PATH_SEPARATOR, get_include_path());
+			
+			$return = false;
+			
+			foreach($includes as $include) {
+				if(file_exists($include. DIRECTORY_SEPARATOR. $filename)) {
+					$return = true;
+				}
+			}
+			
+			return $return;
 		}
 	}
 
