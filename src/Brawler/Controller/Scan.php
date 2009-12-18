@@ -57,11 +57,22 @@
 
 			$url = Brawler_Console::getArgument('r')->getValue();
 			
+			if(Brawler_Console::getArgument('f')) {
+				$depth = Brawler_Console::getArgument('f')->getValue();
+			} else {
+				$depth = '5';
+			}
+			
 			$this->_scanRecursively($url, 0, 5);
 			
-			$grid = new Brawler_View_Grid();
+			/*$grid = new Brawler_View_Grid();
 			$grid->setRows(new ArrayObject($this->_urls));
 			$this->setView($grid);
+			$grid->setLabels(new ArrayObject(array('URL')));*/
+			
+			Brawler_Console_Output::output(
+				'Found '. count($this->_urls). ' recources.'
+			);
 		}
 		
 		/**
@@ -73,14 +84,22 @@
 		 * @return void
 		 */
 		protected function _scanRecursively($url, $level, $maxlevel) {
-			$urls = $this->_client->request($url)->getUrls();
+			Brawler_Console_Output::output('Scanning: '. $url);
 			
+			// Checking for Vulns
+			$this->_checkVulnerabilites($url);
+			
+			// fetch urls
+			$urls = $this->_client->request($url)->getUrls();
 			$urls = array_unique($urls);
 			$urls = $this->_filterKnownUrls($urls);
 			$urls = $this->_filterForeignHostUrls($urls);
 			
+			Brawler_Console_Output::output('Found '. count($urls). ' new resources.');
+
 			$this->_urls = array_merge($urls, $this->_urls);
-			
+
+			// scan newly found urls
 			if($level < $maxlevel) {
 				foreach($urls as $newUrl) {
 					$this->_scanRecursively($newUrl, $level+1, $maxlevel);
@@ -122,5 +141,9 @@
 			}
 			
 			return $return;
+		}
+		
+		protected function _checkVulnerabilites($url) {
+			$this->preCallNotify('_checkVulnerabilities', array($url));
 		}
 	}

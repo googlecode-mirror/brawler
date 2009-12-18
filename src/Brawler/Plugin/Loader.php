@@ -77,11 +77,11 @@
 		/**
 		 * Scans a path for plugins
 		 * 
-		 * @param $dir String
-		 * @param $list Brawler_Plugin_List
+		 * @param String $dir String
+		 * @param Brawler_Plugin_List $list
 		 * @return Brawler_Plugin_List
 		 */
-		protected static function scanPlugins($dir, $list) {
+		protected static function scanPlugins($dir, Brawler_Plugin_List $list) {
 			$dir = 
 				$dir. DIRECTORY_SEPARATOR.
 				'Brawler'. DIRECTORY_SEPARATOR.

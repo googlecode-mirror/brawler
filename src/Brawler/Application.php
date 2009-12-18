@@ -82,6 +82,12 @@
 				true
 			));
 			
+			$list->append(new Brawler_Plugin_Argument(
+				'f',
+				'Maximum link follow depth (default: 5)',
+				true
+			));
+			
 			// Plugin arguments
 			// @TODO find a better way to merge ArrayObjects
 			$plugins = Brawler_Plugin_Loader::getPlugins();

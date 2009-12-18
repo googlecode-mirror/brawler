@@ -80,6 +80,7 @@
 		 * Parses the given arguments
 		 * 
 		 * @return void
+		 * @throws Brawler_Console_Exception
 		 */
 		public static function _parseArguments() {
 			self::$_arguments = new Brawler_Console_Argument_List();
@@ -93,7 +94,7 @@
 					self::_parseArgument($i->current());
 				} else {
 					// invalid call
-					throw new Exception('Invalid call');
+					throw new Brawler_Console_Exception('Invalid call');
 				}
 				
 				$i->next();
@@ -103,8 +104,8 @@
 		/**
 		 * Parses a single argument
 		 * 
-		 * @param $argument
-		 * @return void
+		 * @param String $argument
+		 * @return Bool
 		 */
 		protected static function _parseArgument($argument) {
 			$return = self::_parseNonValuedArgument($argument);

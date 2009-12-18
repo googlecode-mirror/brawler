@@ -101,7 +101,7 @@
 		/**
 		 * Renders a single line
 		 * 
-		 * @param $row
+		 * @param ArrayObject $row
 		 * @return void
 		 */
 		protected function _renderline($row) {

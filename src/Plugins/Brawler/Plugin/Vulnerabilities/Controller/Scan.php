@@ -24,21 +24,23 @@
 	 * @license     GNU Lesser General Public License 
 	 *              http://www.gnu.org/licenses/lgpl.html
 	 */
-	
-	// turn on error messages
-	error_reporting(E_ALL | E_STRICT);
-	ini_set('display_errors', 1);	
 
-	// set include path
-	set_include_path(get_include_path(). PATH_SEPARATOR. dirname(__FILE__));
-	
-	// require autoloader
-	require_once 'Brawler/Loader.php';
-	
-	// register autoloader
-	spl_autoload_register(array('Brawler_Loader', 'load'));
-	
-	// kick application
-	return Brawler_Application::run();
-	
-?>
+	/**
+	 * Extends the scan controller
+	 * 
+	 * @package     Brawler
+	 * @subpackage  Vulnerabilities
+	 * @author      Cem Derin, <actioncem@gmail.com>
+	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
+	 */
+	class Brawler_Plugin_Vulnerabilities_Controller_Scan extends Brawler_Plugin_Plug_Abstract {
+		/**
+		 * Will check for generic issues
+		 * 
+		 * @param Brawler_Plugin_Notification $notification
+		 * @return Brawler_Plugin_Notification
+		 */
+		public function _checkVulnerabilities(Brawler_Plugin_Notification $notification) {
+			
+		}
+	}

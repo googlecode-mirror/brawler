@@ -55,7 +55,7 @@
 		 * @param Array $arguments
 		 * @return void
 		 */
-		public function __construct($method, $arguments) {
+		public function __construct($method, Array $arguments) {
 			$this->_method = $method;
 			$this->_arguments = $arguments;
 		}
@@ -67,5 +67,14 @@
 		 */
 		public function getMethod() {
 			return $this->_method;
+		}
+		
+		/**
+		 * Returns the arguments
+		 * 
+		 * @return Array
+		 */
+		public function getArguments() {
+			return $this->_arguments;
 		}
 	}

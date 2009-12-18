@@ -58,10 +58,11 @@
 		/**
 		 * Ctor
 		 * 
-		 * @param String             $name
-		 * @param Short description  $description
-		 * @param Key-Value-Argument $hasValue
+		 * @param String $name
+		 * @param String $description
+		 * @param Bool $hasValue
 		 * @return void
+		 * @throws Brawler_Plugin_Argument_Exception
 		 */
 		public function __construct($name, $description, $hasValue = false) {
 			if(strlen($name) > 1) {

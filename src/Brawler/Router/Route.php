@@ -104,14 +104,29 @@
 			return $this->_arguments;
 		}
 		
+		/**
+		 * Returns whether this route is chainable
+		 * 
+		 * @return Bool
+		 */
 		public function getChain() {
 			return $this->_chain;
 		}
 		
+		/**
+		 * Returns the controller for this route
+		 * 
+		 * @return String
+		 */
 		public function getController() {
 			return $this->_controller;
 		}
 		
+		/**
+		 * Returns the action for this route
+		 * 
+		 * @return String
+		 */
 		public function getAction() {
 			return $this->_action;
 		}
