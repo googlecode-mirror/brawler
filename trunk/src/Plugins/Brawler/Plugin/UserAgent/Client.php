@@ -34,9 +34,15 @@
 	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 */
 	class Brawler_Plugin_UserAgent_Client extends Brawler_Plugin_Plug_Abstract {
-		public function _initCurl($notification) {
+		/**
+		 * Modifies the user agent
+		 * 
+		 * @param Brawler_Plugin_Notification $notification
+		 * @return Brawler_Plugin_Notification
+		 */
+		public function _initCurl(Brawler_Plugin_Notification $notification) {
 			if($notification instanceof Brawler_Plugin_Notification_Post) {
-				if(Brawler_Console::getArgument('a')->getValue()) {
+				if(Brawler_Console::getArgument('a')) {
 					curl_setopt(
 						$notification->getReturn(), 
 						CURLOPT_USERAGENT, 

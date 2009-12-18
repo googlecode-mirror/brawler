@@ -32,7 +32,7 @@
 	 * @author      Cem Derin, <actioncem@gmail.com>
 	 * @copyright   2009 Cem Derin, <actioncem@gmail.com>
 	 */
-	class Brawler_Controller {
+	class Brawler_Controller extends Brawler_Plugin_Pluggable_Abstract {
 		/**
 		 * Attached view
 		 * 
@@ -52,12 +52,13 @@
 		 * 
 		 * @param String $action
 		 * @return void
+		 * @throws Brawler_Controller_Exception
 		 */
 		public function dispatch($action = 'index') {
 			if(method_exists($this, $action.'Action')) {
 				call_user_func(array($this, $action.'Action'));
 			} else {
-				throw new Exception('Could not find action '. $action);
+				throw new Brawler_Controller_Exception('Could not find action '. $action);
 			}
 			
 			if($this->_render && $this->_view) {

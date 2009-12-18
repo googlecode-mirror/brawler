@@ -119,7 +119,7 @@
 		 * @param Brawler_Router_Argument $routeArgument
 		 * @return Bool
 		 */
-		protected static function _checkFlag($routeArgument) {
+		protected static function _checkFlag(Brawler_Router_Argument $routeArgument) {
 			return Brawler_Console::getArgument($routeArgument->getFlag());
 		}
 		
@@ -129,7 +129,7 @@
 		 * @param Brawler_Router_Argument $routeArgument
 		 * @return Bool
 		 */
-		protected static function _checkValue($routeArgument) {
+		protected static function _checkValue(Brawler_Router_Argument $routeArgument) {
 			if($routeArgument->getOnValue()) {
 				$argument = Brawler_Console::getArgument($routeArgument->getFlag());
 				if(!$argument OR !$argument->getValue()) {
@@ -146,7 +146,7 @@
 		 * @param Brawler_Router_Argument $routeArgument
 		 * @return Bool
 		 */
-		protected static function _checkSpecificValue($routeArgument) {
+		protected static function _checkSpecificValue(Brawler_Router_Argument $routeArgument) {
 			if($routeArgument->getSpecificValue()) {
 				if(self::_checkValue($routeArgument)) {
 					$argument = Brawler_Console::getArgument($routeArgument->getFlag());

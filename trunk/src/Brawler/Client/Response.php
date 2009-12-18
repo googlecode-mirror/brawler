@@ -63,6 +63,7 @@
 		/**
 		 * Returns a DOM representation of the returned document
 		 * @return Brawler_Dom
+		 * @throws Brawler_Client_Response_Exception
 		 */
 		public function getDom() {
 			if(strstr($this->getContentType(), 'html')) {
@@ -98,12 +99,105 @@
 		 */
 		public function getUrls() {
 			$return = array();
-			
-			$nodeList = $this->getDom()->getUrls();
-			foreach($nodeList as $node) {
-				$return[] = $node->attributes->getNamedItem('href')->value;
+			try {
+				$nodeList = $this->getDom()->getUrls();
+			} catch(Brawler_Client_Response_Exception $e) {
+				$nodeList = array();
 			}
 			
+			foreach($nodeList as $node) {
+				if($node->hasAttribute('href')) {
+					$qualified = $node->attributes->getNamedItem('href')->value;
+					if(	$this->_notEmpty($qualified) AND
+						$this->_notAnchor($qualified) AND
+						$this->_notJavaScript($qualified) AND
+						$this->_notSchemeOnly($qualified)) {
+						$qualified = $this->_qualify($qualified);
+						$return[] = $qualified;
+					}
+				}
+			}
 			return $return;
+		}
+		
+		/**
+		 * Qualifies reltive urls
+		 * 
+		 * @param String $url
+		 * @return String
+		 */
+		protected function _qualify($url) {
+			$currentUrl = parse_url($this->_rawInfo['url']);
+			$foundUrl = parse_url($url);
+			
+			if(!isset($foundUrl['host']) AND isset($foundUrl['path'])) {
+				if(substr($url, 0, 1) == '/') {
+					return 
+						$currentUrl['scheme'].
+						'://'.
+						$currentUrl['host'].
+						$foundUrl['path'];	
+				} else {
+					if(substr($currentUrl['path'], -1, 1) == '/') {
+						$path = $currentUrl['path'];
+					} else {
+						$path = dirname($foundUrl['path']);
+					}
+					
+					return 
+						$currentUrl['scheme'].
+						'://'.
+						$currentUrl['host'].
+						$path.
+						$foundUrl['path'];
+				}
+			}
+			
+			return $url;
+		}
+		
+		/**
+		 * Checks whether the url is empty
+		 * 
+		 * @param String $url
+		 * @return Bool
+		 */
+		protected function _notEmpty($url) {
+			$url = trim($url);
+			return !(empty($url));
+		}
+		
+		/**
+		 * Checks whether the url is not a lone anchor
+		 * 
+		 * @param String $url
+		 * @return Bool
+		 */
+		protected function _notAnchor($url) {
+			$url = trim($url);
+			return ($url != '#');
+		}
+		
+		/**
+		 * Checks whether the url is not an embedded javascript - geez -.-
+		 * 
+		 * @param String $url
+		 * @return Bool
+		 */
+		protected function _notJavaScript($url) {
+			$url = trim($url);
+			return (substr($url, 0, strlen('javascript:')) != 'javascript:');
+		}
+		
+		/**
+		 * Checks whether the url is not just "http://"
+		 * @todo find the reason for this case!
+		 * 
+		 * @param String $url
+		 * @return Bool
+		 */
+		protected function _notSchemeOnly($url) {
+			$url = trim($url);
+			return ($url != 'http://');
 		}
 	}
