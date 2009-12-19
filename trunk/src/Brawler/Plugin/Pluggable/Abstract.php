@@ -116,9 +116,14 @@
 		 * @param Brawler_Plugin $plugin
 		 * @return String
 		 */
-		public function getPluginClassName($plugin) {
+		public function getPluginClassName(Brawler_Plugin $plugin) {
+			$class = get_class($this);
+			return $plugin->getBaseName() .'_'. substr($class, strpos($class, '_'));
+			
+			/*
 			$return = split('_', get_class($this));
 			array_shift($return);
 			return $plugin->getBaseName(). '_'. implode('_', $return);
+			*/
 		}
 	}

@@ -66,7 +66,7 @@
 		 * @throws Brawler_Client_Response_Exception
 		 */
 		public function getDom() {
-			if(strstr($this->getContentType(), 'html')) {
+			if(strpos($this->getContentType(), 'html')) {
 				return new Brawler_Dom($this->getRawContent(), $this->_rawInfo['url']);
 			} else {
 				throw new Brawler_Client_Response_Exception('Invalid content type');
@@ -79,7 +79,7 @@
 		 * @return String
 		 */
 		public function getContentType() {
-			$return = split(';', $this->_rawInfo['content_type']);
+			$return = explode(';', $this->_rawInfo['content_type']);
 			return trim($return[0]);
 		}
 		
