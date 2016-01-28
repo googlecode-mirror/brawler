@@ -1,0 +1,3 @@
+Brawler is the vision of a completely new scanner software to check web applications for common and generic security issues, completely written in PHP, highly extendable and tight. No third party software – except php for itself – is used.
+
+First release will come soon. Meanwhile check out the project owners [blog (german)](http://phphacker.net/2009/12/04/workshop-brawler-–%C2%A0the-web-application-security-scanner-teil-0/)
